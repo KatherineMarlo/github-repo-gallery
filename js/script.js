@@ -1,6 +1,8 @@
 ///*****GLOBAL STYLES********//
 //Overview Div- Profile information//
 const overviewDiv = document.querySelector(".overview");
+//Display of Repos//
+const repoDisplay = document.querySelector(".repo-list");
 //gitHub username//
 const username = "KatherineMarlo";
 
@@ -28,4 +30,21 @@ const displayUserInfo = function (data) {
     </div>
   `;
   overviewDiv.append(userDiv);
+  fetchRepo();
 };
+
+const fetchRepo = async function() {
+  const repoSite = await fetch(`https://api.github.com/users/${username}/repos?sort=updated&per_page=100`);
+  const repoData = await repoSite.json();
+  displayRepo(repoData);
+};
+
+const displayRepo = function (repos) {
+  for (const repo of repos) {
+    const listItem = document.createElement("li");
+    listItem.classList.add("repo");
+    listItem.innerHTML = `<h3>${repo.name}</h3>`;
+    repoDisplay.append(listItem);
+  }
+};
+
