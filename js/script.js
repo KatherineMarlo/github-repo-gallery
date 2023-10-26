@@ -26,6 +26,7 @@ githubInfo();
 //use the data.(Whatevervalue) to target the data variable and the json info then the info that you are trying to target//
 const displayUserInfo = function (data) {
   const userDiv = document.createElement("div");
+  userDiv.classList.add("user-info");
   userDiv.innerHTML = `
     <figure>
       <img alt="user avatar" src=${data.avatar_url} />
